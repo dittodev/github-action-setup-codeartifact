@@ -13,21 +13,9 @@ inputs:
   domain-owner:
     description: "AWS account hosting CodeArtifact"
     required: true
-  role-to-assume:
-    description: "Role to assume"
-    required: true
-  aws-region:
-    description: "AWS region"
-    required: true
 runs:
   using: "composite"
   steps:
-    - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@v4.0.2
-      with:
-        role-to-assume: ${{ inputs.role-to-assume }}
-        role-session-name: GitHub_to_AWS_via_FederatedOIDC
-        aws-region: ${{ inputs.aws-region }}
     - name: Configure npm
       run: |
         aws codeartifact login \
